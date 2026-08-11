@@ -9,7 +9,7 @@ from PIL import Image
 
 
 API_URL = "https://openai.rc.asu.edu/v1/images/edits"
-MODEL = "flux-2-dev-edit"
+MODEL = "flux-2"
 
 
 def tensor_to_png(image):

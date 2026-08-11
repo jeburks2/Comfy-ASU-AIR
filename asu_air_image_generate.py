@@ -9,7 +9,7 @@ from PIL import Image
 
 
 API_URL = "https://openai.rc.asu.edu/v1/images/generations"
-MODEL = "flux-2-dev"
+MODEL = "flux-2"
 
 
 class ASUAIRImageGenerator:
