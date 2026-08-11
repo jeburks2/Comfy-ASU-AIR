@@ -81,7 +81,7 @@ class ASUAIRImageGenerator:
     RETURN_NAMES = ("image",)
 
     FUNCTION = "generate"
-    CATEGORY = "ASU AI"
+    CATEGORY = "ASU AIR"
 
     def generate(
         self,
