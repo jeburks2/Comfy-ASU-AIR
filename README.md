@@ -9,20 +9,24 @@ Custom ComfyUI nodes for generating and editing images through the ASU AIR API h
 - **ASU AIR Image Editor**
   - Edits an input image (optionally with a mask) using prompt-guided image editing.
 
-Both nodes currently target the `flux-2-dev` model exposed by the ASU AIR API.
+Both nodes currently target the `flux-2` model exposed by the ASU AIR API.
 
 ## Prerequisites
 
 - A working ComfyUI installation
-- Active connection to the ASU network through Cisco VPN (required for API access)
-- Python dependencies available in your ComfyUI environment:
-  - `requests`
-  - `numpy`
-  - `Pillow`
-  - `torch` (already present in most ComfyUI setups)
+- Active connection to the ASU network through [Cisco VPN](https://docs.rc.asu.edu/sslvpn) (required for API access)
 - An **ASU AIR API key**
-  - Request and manage your key using the ASU Research Computing docs:
-  - https://docs.rc.asu.edu/ai/api
+
+### How to Request an ASU AIR API Key
+
+API keys are managed through the Voyager Account Management portal.
+
+1. Login to the [Voyager Account Management portal](https://voyager.rc.asu.edu) (Cisco VPN connection required) with your ASURITE credentials.
+2. Navigate to the LLM Access tab.
+3. Click Create Key to generate an API key.
+4. Save this key securely.
+
+See the [API Key Documentation](https://docs.rc.asu.edu/ai/api) for more information on managing your API key.
 
 ## Installation
 
@@ -31,14 +35,14 @@ Both nodes currently target the `flux-2-dev` model exposed by the ASU AIR API.
 
     ```bash
     cd /path/to/ComfyUI/custom_nodes
-    git clone https://github.com/<your-org-or-user>/Comfy-ASU-AIR.git
+    git clone https://github.com/jeburks2/Comfy-ASU-AIR.git
     ```
 
 3. Restart ComfyUI.
 
 ## Configure Your API Key In ComfyUI
 
-This node set expects an environment variable named `ASU_AIR_API_KEY`.
+These nodes expect an environment variable named `ASU_AIR_API_KEY`.
 
 In ComfyUI, configure it directly in your instance settings:
 
@@ -52,8 +56,6 @@ In ComfyUI, configure it directly in your instance settings:
 
 4. Save settings and restart the ComfyUI instance.
 
-Get or manage your API key here: https://docs.rc.asu.edu/ai/api
-
 ## Usage Notes
 
 - The nodes appear in ComfyUI under the **ASU AIR** category.
@@ -66,12 +68,16 @@ Get or manage your API key here: https://docs.rc.asu.edu/ai/api
 - **`ASU_AIR_API_KEY environment variable is not set`**
   - Confirm it is set in **Instance Settings** -> **Startup Args** for the running instance.
 - **HTTP errors from the API**
-  - Confirm Cisco VPN is connected before running the workflow.
-  - Verify your key is valid and active per the ASU AIR docs: https://docs.rc.asu.edu/ai/api
+  - Confirm [Cisco VPN](https://docs.rc.asu.edu/sslvpn) is connected before running the workflow.
+  - Verify your key is valid and active per the [ASU AIR docs](https://docs.rc.asu.edu/ai/api)
   - Check prompt/parameter values and try again.
 - **Node not visible in ComfyUI**
   - Confirm repository path is under `ComfyUI/custom_nodes/` and restart ComfyUI.
 
 ## Disclaimer
 
-This project is an integration layer for ComfyUI and ASU AIR APIs. API behavior, model availability, limits, and authentication policies are controlled by ASU Research Computing.
+This project is an integration layer for ComfyUI and ASU AIR APIs. API behavior, model availability, limits, and authentication policies are controlled by ASU Research Computing. 
+
+[Research Computing Policies](https://links.asu.edu/policy)
+[Research Computing Documentation](https://docs.rc.asu.edu/)
+[Research Computing Support](https://links.asu.edu/rc-support)
