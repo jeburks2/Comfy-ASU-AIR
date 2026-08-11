@@ -82,4 +82,4 @@ This project is an integration layer for ComfyUI and ASU AIR APIs. API behavior,
 
 [Research Computing Documentation](https://docs.rc.asu.edu/)
 
-[Research Computing Support](https://links.asu.edu/rc-support)
+[Research Computing Support](https://docs.rc.asu.edu/contact-us)
