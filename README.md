@@ -40,7 +40,7 @@ See the [API Key Documentation](https://docs.rc.asu.edu/ai/api) for more informa
 
 3. Restart ComfyUI.
 
-## Configure Your API Key In ComfyUI
+### Configure Your API Key In ComfyUI
 
 These nodes expect an environment variable named `ASU_AIR_API_KEY`.
 
@@ -79,5 +79,7 @@ In ComfyUI, configure it directly in your instance settings:
 This project is an integration layer for ComfyUI and ASU AIR APIs. API behavior, model availability, limits, and authentication policies are controlled by ASU Research Computing. 
 
 [Research Computing Policies](https://links.asu.edu/policy)
+
 [Research Computing Documentation](https://docs.rc.asu.edu/)
+
 [Research Computing Support](https://links.asu.edu/rc-support)
