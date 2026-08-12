@@ -1,0 +1,172 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "revision": 0,
+  "last_node_id": 4,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        60,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "asuair_example_source.png",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ASUAIRImageEditor",
+      "pos": [
+        440,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ASUAIRImageEditor"
+      },
+      "widgets_values": [
+        "Redraw this scene as a flat vector travel poster with bold simplified shapes, a limited five-color palette, and clean outlines, in the style of vintage national park posters",
+        "1024x1024",
+        7,
+        "fixed",
+        0,
+        0
+      ]
+    },
+    {
+      "id": 3,
+      "type": "SaveImage",
+      "pos": [
+        820,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "asuair_examples/03_image_to_image"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Note",
+      "pos": [
+        60,
+        -320
+      ],
+      "size": [
+        420,
+        310
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "IMAGE TO IMAGE — restyling.\n\nThe Editor takes YOUR image plus a prompt describing what should change. Here the prompt asks for a medium/style translation (watercolor scene -> vector travel poster) while the composition carries over from the input.\n\nUPLOAD YOUR OWN: click 'choose file to upload' on the Load Image node. Photos, scans of your sketchbook, previous generations — anything.\n\nPROMPT PATTERN: describe the DESTINATION, not the journey. Say what the result should be ('a flat vector poster with...'), and anchor what must survive ('this scene').\n\nEXERCISE: run the same source through three destinations — a woodcut print, a child's crayon drawing, an architectural blueprint. Which features of your source does each style keep?"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
