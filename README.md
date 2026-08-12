@@ -1,6 +1,6 @@
 # Comfy-ASU-AIR
 
-Custom ComfyUI nodes for generating and editing images through the ASU AIR API hosted by ASU Research Computing.
+Custom ComfyUI nodes for generating and editing images and generating video through the ASU AIR API hosted by ASU Research Computing.
 
 ## Included Nodes
 
@@ -8,8 +8,10 @@ Custom ComfyUI nodes for generating and editing images through the ASU AIR API h
   - Creates images from text prompts using the ASU AIR image generation endpoint.
 - **ASU AIR Image Editor**
   - Edits an input image (optionally with a mask) using prompt-guided image editing.
+- **ASU AIR Video Generator**
+  - Creates short video clips from a text prompt using the ASU AIR video endpoint. Wiring the optional `IMAGE` input switches it to image-to-video (the prompt then describes the motion). Returns a `VIDEO` output for ComfyUI's built-in `SaveVideo` node.
 
-Both nodes currently target the `flux-2` model exposed by the ASU AIR API.
+The image nodes currently target the `flux-2` model exposed by the ASU AIR API; the video node targets `wan-2-2` (Wan2.2).
 
 ## Prerequisites
 
@@ -62,6 +64,9 @@ In ComfyUI, configure it directly in your instance settings:
 - If `ASU_AIR_API_KEY` is missing, the nodes raise an error at runtime.
 - The generator supports output formats: `png`, `jpeg`, and `webp`.
 - The editor accepts an optional `MASK` input for inpainting-style workflows.
+- Video jobs are asynchronous: the video node submits the job, polls the API (forwarding render progress to ComfyUI's progress bar), and downloads the finished mp4. A 4-second clip takes roughly 5 minutes to render — the default `timeout` allows 30 minutes.
+- The video node's `seed` is not sent to the API; it only busts ComfyUI's cache so re-queueing the same prompt renders a fresh clip.
+- The video node requires a ComfyUI recent enough to have the `VIDEO` type and `comfy_api.input_impl.VideoFromFile` (v0.3.30+).
 
 ## Troubleshooting
 
