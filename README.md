@@ -58,6 +58,17 @@ In ComfyUI, configure it directly in your instance settings:
 
 4. Save settings and restart the ComfyUI instance.
 
+## Updating
+
+To update the nodes, navigate to the `Comfy-ASU-AIR` directory and pull the latest changes:
+
+```bash
+cd /path/to/ComfyUI/custom_nodes/Comfy-ASU-AIR
+git pull
+````
+
+Then restart ComfyUI.
+
 ## Usage Notes
 
 - The nodes appear in ComfyUI under the **ASU AIR** category.
