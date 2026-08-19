@@ -48,7 +48,7 @@ class ASUAIRImageEditor:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "image": ("IMAGE",),
+                "image_1": ("IMAGE",),
                 "prompt": (
                     "STRING",
                     {
@@ -69,7 +69,20 @@ class ASUAIRImageEditor:
                 ),
             },
             "optional": {
+                "image_2": ("IMAGE",),
+                "image_3": ("IMAGE",),
+                "image_4": ("IMAGE",),
+                "image_5": ("IMAGE",),
+                "image_6": ("IMAGE",),
                 "mask": ("MASK",),
+                "prompt_override": (
+                    "STRING",
+                    {
+                        "forceInput": True,
+                        "multiline": True,
+                        "default": "",
+                    },
+                ),
                 "seed": (
                     "INT",
                     {
@@ -108,10 +121,16 @@ class ASUAIRImageEditor:
 
     def edit(
         self,
-        image,
+        image_1,
         prompt,
         size,
+        image_2=None,
+        image_3=None,
+        image_4=None,
+        image_5=None,
+        image_6=None,
         mask=None,
+        prompt_override=None,
         seed=0,
         steps=0,
         guidance=0.0,
@@ -123,27 +142,34 @@ class ASUAIRImageEditor:
                 "ASU_AIR_API_KEY environment variable is not set"
             )
 
-        image_buffer = tensor_to_png(image)
+        # Use prompt_override if a string was connected to that input,
+        # otherwise use the widget's prompt value
+        final_prompt = prompt_override if prompt_override else prompt
 
-        files = {
-            "image": (
-                "image.png",
-                image_buffer,
-                "image/png",
-            ),
-        }
+        # Primary image + additional references sent as multiple "image" values
+        # (OpenAI-style multi-image edits API convention)
+        files = [
+            ("image", ("image.png", tensor_to_png(image_1), "image/png"))
+        ]
+
+        # Additional reference images (skip if not connected)
+        reference_images = [image_2, image_3, image_4, image_5, image_6]
+
+        for idx, ref_image in enumerate(reference_images, start=2):
+            if ref_image is not None:
+                files.append(
+                    ("image", (f"image_{idx}.png", tensor_to_png(ref_image), "image/png"))
+                )
 
         if mask is not None:
             mask_buffer = mask_to_png(mask)
-            files["mask"] = (
-                "mask.png",
-                mask_buffer,
-                "image/png",
+            files.append(
+                ("mask", ("mask.png", mask_buffer, "image/png"))
             )
 
         data = {
             "model": MODEL,
-            "prompt": prompt,
+            "prompt": final_prompt,
             "n": "1",
             "size": size,
             "response_format": "b64_json",
