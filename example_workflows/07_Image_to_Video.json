@@ -1,0 +1,222 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "revision": 0,
+  "last_node_id": 5,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "ASUAIRImageGenerator",
+      "pos": [
+        60,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            1,
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ASUAIRImageGenerator"
+      },
+      "widgets_values": [
+        "A paper-craft diorama of an underwater coral reef, layered cut-paper fish and seaweed, depth between the paper layers, soft studio lighting",
+        "1536x1024",
+        "png",
+        5,
+        "fixed",
+        0,
+        0
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ASUAIRVideoGenerator",
+      "pos": [
+        440,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ASUAIRVideoGenerator"
+      },
+      "widgets_values": [
+        "Gentle slow camera push-in; the cut-paper fish sway and drift between the layers, light shimmers softly across the paper waves",
+        4,
+        "1280x704",
+        1,
+        "fixed",
+        10,
+        1800
+      ]
+    },
+    {
+      "id": 3,
+      "type": "SaveImage",
+      "pos": [
+        440,
+        380
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "asuair_examples/07_keyframe"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "SaveVideo",
+      "pos": [
+        820,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 3
+        },
+        {
+          "name": "format",
+          "type": "COMBO",
+          "link": null
+        },
+        {
+          "name": "codec",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveVideo"
+      },
+      "widgets_values": [
+        "video/asuair_examples_07"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "Note",
+      "pos": [
+        60,
+        -360
+      ],
+      "size": [
+        420,
+        350
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "IMAGE TO VIDEO — the finale: the whole pack in one graph.\n\nThe Generator paints a keyframe; the Video Generator (wan-2-2) animates it. With an image wired in, the video PROMPT describes MOTION, not content — camera moves, what drifts, what shimmers. The image already says what everything looks like.\n\nPATIENCE REQUIRED: video renders on ASU's servers for ~5 minutes for a 4-second clip. The progress bar is real — let it run.\n\nYou can also disconnect the image input entirely: the node then does text-to-video and the prompt describes both content AND motion.\n\nMOTION PROMPT CRAFT: one camera instruction + two or three subject motions is plenty. 'Everything moves' reads as chaos.\n\nEXERCISE: storyboard a 3-shot sequence. Generate three keyframes with workflow 01, animate each with a different camera move, and cut them together."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      1,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      2,
+      0,
+      4,
+      0,
+      "VIDEO"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

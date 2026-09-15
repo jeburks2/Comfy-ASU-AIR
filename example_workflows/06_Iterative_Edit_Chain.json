@@ -1,0 +1,315 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "revision": 0,
+  "last_node_id": 7,
+  "last_link_id": 5,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "ASUAIRImageGenerator",
+      "pos": [
+        60,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            1,
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ASUAIRImageGenerator"
+      },
+      "widgets_values": [
+        "Ink line drawing of a fox standing in a wildflower meadow, clean confident linework, plain white background, no shading",
+        "1024x1024",
+        "png",
+        21,
+        "fixed",
+        0,
+        0
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ASUAIRImageEditor",
+      "pos": [
+        440,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            3,
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ASUAIRImageEditor"
+      },
+      "widgets_values": [
+        "Add loose watercolor washes of color over this ink drawing, warm autumn palette, keep every ink line crisp and visible",
+        "1024x1024",
+        21,
+        "fixed",
+        0,
+        0
+      ]
+    },
+    {
+      "id": 4,
+      "type": "SaveImage",
+      "pos": [
+        440,
+        380
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "asuair_examples/06_stage1_lineart"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "ASUAIRImageEditor",
+      "pos": [
+        820,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 3
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ASUAIRImageEditor"
+      },
+      "widgets_values": [
+        "Add a small fox kit sitting in the grass beside the fox, drawn and colored in exactly the same ink-and-watercolor style as the rest of the image",
+        "1024x1024",
+        21,
+        "fixed",
+        0,
+        0
+      ]
+    },
+    {
+      "id": 5,
+      "type": "SaveImage",
+      "pos": [
+        820,
+        380
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "asuair_examples/06_stage2_color"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "SaveImage",
+      "pos": [
+        1200,
+        60
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "asuair_examples/06_stage3_kit"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "Note",
+      "pos": [
+        60,
+        -360
+      ],
+      "size": [
+        420,
+        350
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ITERATIVE EDITING — build the image in passes, like a real studio process.\n\nStage 1 generates clean line art. Stage 2 edits it (add color). Stage 3 edits the RESULT of stage 2 (add an element). Each Editor feeds the next, and each stage is saved so you can compare.\n\nWHY CHAIN INSTEAD OF ONE GIANT PROMPT? One change per pass keeps control: if stage 3 goes wrong, stages 1-2 are safe and you only redo the last step. It's underdrawing -> color -> detail.\n\nWHAT COMPOUNDS: each edit re-interprets the whole image, so tiny drifts accumulate — after many passes, edges soften and details mutate. When drift gets objectionable, that's the signal to stop iterating (or restart from an earlier stage).\n\nEXERCISE: plan a 3-pass painting before you run anything — write the three prompts first. Painters call this a study; here it's also cheaper."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      1,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      2,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      4,
+      2,
+      0,
+      5,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      3,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
